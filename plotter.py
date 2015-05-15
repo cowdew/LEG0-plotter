@@ -31,29 +31,24 @@ class Conveyer:
 
         self.motor.weak_turn(-self.thrust, self.tacho)
         self._motor_wait()
-        self.motor.idle()
 
     def right(self):
 
         self.motor.weak_turn(self.thrust, self.tacho)
         self._motor_wait()
-        self.motor.idle()
 
 def main():
 
     try:
-        sock = nxt.locator.find_one_brick()
+        device = nxt.locator.find_one_brick()
     except nxt.locator.BrickNotFoundError:
         print 'Brick not found'
         sys.exit(1)
 
-    
-    conveyer = Conveyer(sock)
+    conveyer = Conveyer(device)
 
     conveyer.left()
     conveyer.right()
-
-    time.sleep(1)
 
 if __name__ == '__main__':
     main()
